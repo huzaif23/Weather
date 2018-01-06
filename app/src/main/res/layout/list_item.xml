@@ -13,6 +13,7 @@
         android:layout_toRightOf="@id/img"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
+        android:textColor="#fff"
         />
 
     <TextView
@@ -24,6 +25,7 @@
         android:layout_toRightOf="@id/img"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
+        android:textColor="#fff"
         />
     <ImageView
         android:layout_width="80dp"

@@ -9,30 +9,49 @@ import org.json.JSONObject;
 
 class MultipleData extends sCapture {
 
-AsyncResult as=null;
-    String[] processResultMulti(String x) {
+        AsyncResult as=null;
+    Constants processResultMulti(String x) {
         final String WEATHER="weather";
         final String MAIN = "main";
         final String TEMP = "temp";
-
+        String[] temp = new String[5];
+        String[] forecast = new String[5];
         try {
             JSONObject jsonObject = new JSONObject(x);
             JSONArray items = jsonObject.getJSONArray("list");
 
-            JSONObject[] jsonObjects = new JSONObject[5];
-            JSONObject[] main = new JSONObject[5];
-            String[] temp = new String[5];
-            for (int i =0 ; i<5;i++) {
-                jsonObjects[i] = items.getJSONObject(i);
+            JSONObject[] afterList = new JSONObject[items.length()];
+           for (int i=0;i<items.length();i++) {
+           afterList[i] = items.getJSONObject(i);
+           }
+            JSONObject[] main=new JSONObject[afterList.length];
+            JSONArray[] desc = new JSONArray[afterList.length];
 
-                 main[i] = jsonObjects[i].getJSONObject("main");
+           for (int m=0;m<5;m++) {
+               main[m] = afterList[m].getJSONObject("main");
 
-                temp[i]= main[i].getString("temp");
-                Log.e("multi",""+temp[i]);
+               Log.e("multi","g"+main[m]);}
+
+            JSONObject q[] = new JSONObject[afterList.length];
+            for (int n=0;n<afterList.length;n++) {
+                desc[n] = afterList[n].getJSONArray("weather");
+                q[n] = desc[n].getJSONObject(0);
+                Log.e("multi",""+q[n].getString("main"));
             }
-            return temp;
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+
+
+
+
+
+
+            return new Constants();
+            }
+
+
+         catch (JSONException e) {
+
+            Log.e("multi","error"+e);
         }
             return null;
 
@@ -78,14 +97,14 @@ AsyncResult as=null;
 
     @Override
     protected void onPostExecute(String s) {
-        String[] res;
-        res = processResultMulti(s);
-        as.test(res);
+        Constants c;
+       c = processResultMulti(s);
+        as.test(c);
     }
 
     @Override
     protected String doInBackground(String... param) {
-        String[] params = {"https://api.openweathermap.org/data/2.5/forecast?lat=35&lon=167&appid=cf761f0ca67ee1e7305f44199a1a9128"};
+        String[] params = {"https://api.openweathermap.org/data/2.5/forecast?lat=35&lon=167&appid=cf761f0ca67ee1e7305f44199a1a9128&units=metric"};
           return super.doInBackground(params);
 
     }

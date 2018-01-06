@@ -6,5 +6,5 @@ package com.weather.project.weather;
 
 public interface AsyncResult {
     public void result(Constants c);
-    public void test(String[] x);
+    public void test(Constants x);
 }

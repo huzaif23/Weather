@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
-
+        android:background="#3914f8"
         >
         <android.support.design.widget.TabLayout
             android:layout_width="match_parent"

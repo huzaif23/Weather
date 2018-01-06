@@ -21,7 +21,8 @@ public class GetData  {
     public String LONGITUDE = "&lon=";
     public String APP_ID = "&appid=";
     public String API_KEY = "cf761f0ca67ee1e7305f44199a1a9128";
-    public String CurrentWeatherURL = BASE_URL + LATITUDE + "24.946218" + LONGITUDE + "67.005615" + APP_ID + API_KEY;
+    public String unit = "&units=metric";
+    public String CurrentWeatherURL = BASE_URL + LATITUDE + "24.946218" + LONGITUDE + "67.005615" + APP_ID + API_KEY+unit;
     public static String data;
 
 }

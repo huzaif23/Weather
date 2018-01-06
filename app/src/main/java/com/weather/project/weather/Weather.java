@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.weather.project.weather.Adapters.ViewPagerAdapter;
 import com.weather.project.weather.Fragments.DetailFragment;
 import com.weather.project.weather.Fragments.FragmentTwo;
@@ -93,28 +94,24 @@ public class Weather extends AppCompatActivity implements AsyncResult {
 
         textView1.setText(c.getCity());
         String y = c.getMain().toLowerCase().trim();
-        Double x = convertToCelsius(c.getTemperature());
-        temp.setText(""+x.shortValue()+" C");
+
+        temp.setText(""+c.getTemperature().shortValue()+" C");
         Toast.makeText(this,""+y,Toast.LENGTH_LONG).show();
        int resource = getApplicationContext().getResources().getIdentifier(y,"drawable",getApplicationContext().getPackageName());
-//        Picasso.with(getApplicationContext()).load(resource).into(img);
+        Picasso.with(getApplicationContext()).load(R.drawable.clear).into(img);
 
     }
 
     @Override
-    public void test(String[] x) {
-
-      list.add(new DetailFragment(x));
-      list.add(new FragmentTwo());
-
+    public void test(Constants x) {
+        String[] t ={"5","4","234","234","234"};
+         list.add(new DetailFragment(t));
+        list.add(new FragmentTwo());
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),list);
         pager.setAdapter(viewPagerAdapter);
 
     }
 
-    public double convertToCelsius(double x) {
-        return (x-273.15);
-    }
 
 
 //        public void retroFire() {

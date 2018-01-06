@@ -20,6 +20,7 @@ public class list_adapter extends ArrayAdapter<String> {
 
     Activity context;
     String[] data ;
+    Double[] ar = new Double[5];
     public list_adapter(Activity context,String [] data) {
         super(context, R.layout.list_item,data);
         this.context = context;
@@ -34,7 +35,10 @@ public class list_adapter extends ArrayAdapter<String> {
         TextView temp = (TextView) v.findViewById(R.id.t1);
         TextView date = (TextView) v.findViewById(R.id.t2);
         ImageView img = (ImageView) v.findViewById(R.id.img);
-        temp.setText(""+data);
+        for (int i = 0 ; i < 5;i++){
+            ar[i] = Double.parseDouble(data[i]);
+        }
+        temp.setText(""+ar[position].shortValue()+" C");
         return v;
     }
 
