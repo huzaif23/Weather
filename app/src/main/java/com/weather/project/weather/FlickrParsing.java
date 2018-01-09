@@ -14,8 +14,11 @@ class MultipleData extends sCapture {
         final String WEATHER="weather";
         final String MAIN = "main";
         final String TEMP = "temp";
-        String[] temp = new String[5];
-        String[] forecast = new String[5];
+        String[] dayTemp = new String[7];
+        String[] nightTemp = new String[7];
+        String[] eveTemp = new String[7];
+        String[] morningTemp = new String[7];
+        String[] forecast = new String[7];
         try {
             JSONObject jsonObject = new JSONObject(x);
             JSONArray items = jsonObject.getJSONArray("list");
@@ -27,25 +30,25 @@ class MultipleData extends sCapture {
             JSONObject[] main=new JSONObject[afterList.length];
             JSONArray[] desc = new JSONArray[afterList.length];
 
-           for (int m=0;m<5;m++) {
-               main[m] = afterList[m].getJSONObject("main");
 
-               Log.e("multi","g"+main[m]);}
+           for (int m=0;m<afterList.length;m++) {
+               main[m] = afterList[m].getJSONObject("temp");
+
+              dayTemp[m] = main[m].getString("day");
+              nightTemp[m] = main[m].getString("night");
+              eveTemp[m] = main[m].getString("eve");
+              morningTemp[m] = main[m].getString("morn");
+
+           }
 
             JSONObject q[] = new JSONObject[afterList.length];
             for (int n=0;n<afterList.length;n++) {
                 desc[n] = afterList[n].getJSONArray("weather");
                 q[n] = desc[n].getJSONObject(0);
-                Log.e("multi",""+q[n].getString("main"));
+               forecast[n] = q[n].getString("main");
+
             }
-
-
-
-
-
-
-
-            return new Constants();
+            return new Constants(dayTemp,nightTemp,eveTemp,morningTemp,forecast);
             }
 
 
@@ -57,44 +60,6 @@ class MultipleData extends sCapture {
 
     }
 
-
-//    Constants processResult() {
-//        final String WEATHER="weather";
-//        final String MAIN = "main";
-//        final String TEMP = "temp";
-//        final String NAME = "name";
-//        final String DESC = "description";
-//        final String HUMIDITY = "humidity";
-//
-//
-//        try {
-//
-//            JSONObject jsonObject = new JSONObject(data);
-//
-//            JSONArray jsonArray =  jsonObject.getJSONArray(WEATHER);
-//            for (int i = 0;i<jsonArray.length();i++) {
-//                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-//                main = jsonObject1.getString(MAIN);
-//                 desc = jsonObject1.getString(DESC);
-//            }
-//            JSONObject jsonObject2 = jsonObject.getJSONObject(MAIN);
-//            Double temp = jsonObject2.getDouble(TEMP);
-//           String city = jsonObject.getString(NAME);
-//            Double humid = jsonObject2.getDouble(HUMIDITY);
-//
-//            Constants con = new Constants(temp,main,desc,humid,city);
-//            cons =con;
-//
-//            Log.e("result",""+cons.getDesc()+cons.getCity()+cons.getMain());
-//            return cons;
-//        } catch (JSONException e) {
-//            Log.e("errors",""+e);
-//        }
-//
-//        return null;
-//    }
-
-
     @Override
     protected void onPostExecute(String s) {
         Constants c;
@@ -104,7 +69,7 @@ class MultipleData extends sCapture {
 
     @Override
     protected String doInBackground(String... param) {
-        String[] params = {"https://api.openweathermap.org/data/2.5/forecast?lat=35&lon=167&appid=cf761f0ca67ee1e7305f44199a1a9128&units=metric"};
+        String[] params = {"https://api.openweathermap.org/data/2.5/forecast/daily?lat=24.946218&lon=67.005615&appid=cf761f0ca67ee1e7305f44199a1a9128&cnt=7&units=metric"};
           return super.doInBackground(params);
 
     }

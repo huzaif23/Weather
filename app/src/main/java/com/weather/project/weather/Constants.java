@@ -6,7 +6,10 @@ public class Constants {
         private String desc;
         private Double humid;
         private String city;
-        private String[] temp;
+        private String[] dayTemp;
+         private String[] nightTemp;
+         private String[] eveTemp;
+          private String[] mornTemp;
         private String[] multi_main;
     public Constants(Double temperature, String main, String desc, Double humid, String city) {
         Temperature = temperature;
@@ -16,8 +19,11 @@ public class Constants {
         this.city = city;
     }
 
-    public Constants(String[] temp,String[] multi_main) {
-        this.temp = temp;
+    public Constants(String[] dayTemp,String[] nightTemp,String[] eveTemp,String[] mornTemp,String[] multi_main) {
+        this.dayTemp = dayTemp;
+        this.nightTemp = nightTemp;
+        this.eveTemp = eveTemp;
+        this.mornTemp= mornTemp;
         this.multi_main = multi_main;
     }
     public Constants() {
@@ -45,8 +51,20 @@ public class Constants {
         return humid;
     }
 
-    public String[] getTemp() {
-        return temp;
+    public String[] getDayTemp() {
+        return dayTemp;
+    }
+
+    public String[] getNightTemp() {
+        return nightTemp;
+    }
+
+    public String[] getEveTemp() {
+        return eveTemp;
+    }
+
+    public String[] getMornTemp() {
+        return mornTemp;
     }
 
     public String[] getMulti_main() {

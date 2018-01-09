@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,8 +17,9 @@ import com.squareup.picasso.Picasso;
 import com.weather.project.weather.Adapters.ViewPagerAdapter;
 import com.weather.project.weather.Fragments.DetailFragment;
 import com.weather.project.weather.Fragments.FragmentTwo;
+import com.weather.project.weather.Fragments.TopFragment;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -48,7 +50,8 @@ public class Weather extends AppCompatActivity implements AsyncResult {
         sCapture capture = new sCapture();
         capture.as = this;
         capture.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,getData.CurrentWeatherURL);
-        String dates = DateFormat.getDateInstance().format(new Date());
+        SimpleDateFormat formats = new SimpleDateFormat("EEEE, dd MMM yyyy");
+        String dates = formats.format(new Date());
         textView.setText(dates);
         MultipleData m  = new MultipleData();
         m.as=this;
@@ -76,6 +79,7 @@ public class Weather extends AppCompatActivity implements AsyncResult {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        FrameLayout f = (FrameLayout) findViewById(R.id.container);
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -83,6 +87,10 @@ public class Weather extends AppCompatActivity implements AsyncResult {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            f.setVisibility(FrameLayout.VISIBLE);
+            ft.replace(R.id.container,new TopFragment());
+            ft.commit();
             return true;
         }
 
@@ -98,14 +106,13 @@ public class Weather extends AppCompatActivity implements AsyncResult {
         temp.setText(""+c.getTemperature().shortValue()+" C");
         Toast.makeText(this,""+y,Toast.LENGTH_LONG).show();
        int resource = getApplicationContext().getResources().getIdentifier(y,"drawable",getApplicationContext().getPackageName());
-        Picasso.with(getApplicationContext()).load(R.drawable.clear).into(img);
+        Picasso.with(getApplicationContext()).load(R.drawable.clear).placeholder(android.R.drawable.picture_frame).into(img);
 
     }
 
     @Override
     public void test(Constants x) {
-        String[] t ={"5","4","234","234","234"};
-         list.add(new DetailFragment(t));
+         list.add(new DetailFragment(x));
         list.add(new FragmentTwo());
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),list);
         pager.setAdapter(viewPagerAdapter);

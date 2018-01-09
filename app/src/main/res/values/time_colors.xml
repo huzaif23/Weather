@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="DayPrimary">#1894f7</color>
+    <color name="DaySecondaryDark">#0879fa</color>
+    <color name="DayLight">#64B5F6</color>
+
+    <color name="NightPrimary">#2040f4</color>
+    <color name="NightSecondaryDark">#021ee6</color>
+    <color name="NightLight">#3756ff</color>
+    <color name="SecondLight">#3c5aff</color>
+
+    <color name="EvePrimary">#5C6BC0</color>
+    <color name="EveSecondaryDark">#303F9F</color>
+    <color name="EveLight">#9FA8DA</color>
+
+
+    <color name="MorningPrimary">#03A9F4</color>
+    <color name="MorningSecondaryDark">#0277BD</color>
+    <color name="MorningLight">#4FC3F7</color>
+
+    <color name="RainPrimary">#1c1cea</color>
+    <color name="RainSecondaryDark">#FF0202CF</color>
+    <color name="RainLight">#FF4646F5</color>
+
+
+</resources>

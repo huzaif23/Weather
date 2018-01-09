@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.weather.project.weather.Adapters.list_adapter;
+import com.weather.project.weather.Constants;
 import com.weather.project.weather.R;
 
 /**
@@ -22,10 +23,12 @@ public class DetailFragment extends Fragment {
 
     list_adapter adapter;
 
-String[] data;
+
+    Constants c;
+
     @SuppressLint("ValidFragment")
-    public DetailFragment(String [] a) {
-        data=a;
+    public DetailFragment(Constants c) {
+        this.c = c;
     }
 
 
@@ -36,7 +39,7 @@ String[] data;
         View v = inflater.inflate(R.layout.fragment_blank, container, false);
         ListView list = (ListView) v.findViewById(R.id.list);
         Activity activity = getActivity();
-        adapter = new list_adapter(activity,data);
+        adapter = new list_adapter(activity,c.getDayTemp(),c.getNightTemp(),c.getEveTemp(),c.getMornTemp(),c.getMulti_main());
         list.setAdapter(adapter);
         return v;
     }
